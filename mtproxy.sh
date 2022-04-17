@@ -34,25 +34,27 @@ download_file(){
 
     last_version=$(curl -Ls "https://api.github.com/repos/9seconds/mtg/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
     if [[ ! -n "$last_version" ]]; then
-        echo -e "${red}Failure to detect mtp version may be due to exceeding Github API limitations, please try again later."
+        echo -e "${red}Failure to detect mtg version may be due to exceeding Github API limitations, please try again later."
         exit 1
     fi
-    echo -e "Latest version of mtp detected: ${last_version}, start installing..."
+    echo -e "Latest version of mtg detected: ${last_version}, start installing..."
     version=$(echo ${last_version} | sed 's/v//g')
-    wget -N --no-check-certificate -O /usr/bin/mtg-${last_version}-linux-{$bit}.tar.gz https://github.com/9seconds/mtg/releases/download/${last_version}/mtg-${version}-linux-{$bit}.tar.gz
-    if [[ ! -f "/usr/bin/mtg-${last_version}-linux-${bit}.tar.gz" ]]; then
-        echo -e "${red}Download mtp-${last_version}-linux-${bit}.tar.gz failed, please try again."
+    wget -N --no-check-certificate -O /usr/bin/mtg-${version}-linux-${bit}.tar.gz https://github.com/9seconds/mtg/releases/download/${last_version}/mtg-${version}-linux-${bit}.tar.gz
+    if [[ ! -f "/usr/bin/mtg-${version}-linux-${bit}.tar.gz" ]]; then
+        echo -e "${red}Download mtg-${version}-linux-${bit}.tar.gz failed, please try again."
         exit 1
     fi
-    tar -xzf /usr/bin/mtg-${last_version}-linux-${bit}.tar.gz -C /usr/bin
-    rm -rf /usr/bin/mtg-${last_version}-linux-${bit}.tar.gz
+    tar -xzf /usr/bin/mtg-${version}-linux-${bit}.tar.gz -C /usr/bin
+    mv /usr/bin/mtg-${version}-linux-${bit}/mtg /usr/bin/mtg
+    rm -f /usr/bin/mtg-${version}-linux-${bit}.tar.gz
+    rm -rf /usr/bin/mtg-${version}-linux-${bit}/mtg
     chmod +x /usr/bin/mtg
-    echo -e "mtp-${last_version}-linux-${bit}.tar.gz installed successfully, start to configure..."
+    echo -e "mtg-${version}-linux-${bit}.tar.gz installed successfully, start to configure..."
 }
 
-configure_mtp(){
-    echo -e "Configuring mtp..."
-    wget -N --no-check-certificate -O /etc/mtp.toml https://raw.githubusercontent.com/missuo/MTProxy/main/mtp.toml
+configure_mtg(){
+    echo -e "Configuring mtg..."
+    wget -N --no-check-certificate -O /etc/mtg.toml https://raw.githubusercontent.com/missuo/MTProxy/main/mtg.toml
     
     echo ""
     read -p "Please enter a spoofed domain (default google.com): " domain
@@ -66,31 +68,30 @@ configure_mtp(){
     
     echo "Waiting configuration..."
 
-    sed -i "s/secret.*/secret = \"${secret}\"/g" /etc/mtp.toml
-    sed -i "s/bind-to.*/bind-to = \"0.0.0.0:${port}\"/g" /etc/mtp.toml
+    sed -i "s/secret.*/secret = \"${secret}\"/g" /etc/mtg.toml
+    sed -i "s/bind-to.*/bind-to = \"0.0.0.0:${port}\"/g" /etc/mtg.toml
 
-    echo "mtp configured successfully, start to configure systemctl..."
+    echo "mtg configured successfully, start to configure systemctl..."
 }
 
 configure_systemctl(){
     echo -e "Configuring systemctl..."
-    wget -N --no-check-certificate -O /etc/systemd/system/mtp.service https://raw.githubusercontent.com/missuo/MTProxy/main/mtp.service
-    systemctl enable mtp
-    systemctl start mtp
-    echo "mtp configured successfully, start to configure firewall..."
+    wget -N --no-check-certificate -O /etc/systemd/system/mtg.service https://raw.githubusercontent.com/missuo/MTProxy/main/mtg.service
+    systemctl enable mtg
+    systemctl start mtg
+    echo "mtg configured successfully, start to configure firewall..."
     systemctl disable firewalld
     systemctl stop firewalld
     ufw disable
-    echo "mtp start successfully, enjoy it!"
+    echo "mtg start successfully, enjoy it!"
     echo ""
-    echo "mtp configuration:"
-    mtp_config=$(mtg access /etc/mtg.toml)
-    echo -e "${mtp_config}"
+    echo "mtg configuration:"
+    mtg_config=$(mtg access /etc/mtg.toml)
+    echo -e "${mtg_config}"
 }
 
 start_menu() {
     clear
-    echo ""
     echo && echo -e "  MTProxy v2 One-Click Installation
 ---- by Vincent | github.com/missuo/MTProxy ----
  ${green} 1.${plain} Install MTProxy
@@ -103,41 +104,41 @@ start_menu() {
  ${red} 0.${plain} Exit
 ————————————" && echo
 
-	read -e -p " Please enter the number [0-5]:" num
+	read -e -p " Please enter the number [0-5]: " num
 	case "$num" in
     1)
 		download_file
-        configure_mtp
+        configure_mtg
         configure_systemctl
 		;;
     2)
         echo "Uninstall MTProxy..."
-        systemctl stop mtp
-        systemctl disable mtp
+        systemctl stop mtg
+        systemctl disable mtg
         rm -rf /usr/bin/mtg
-        rm -rf /etc/mtp.toml
-        rm -rf /etc/systemd/system/mtp.service
+        rm -rf /etc/mtg.toml
+        rm -rf /etc/systemd/system/mtg.service
         echo "Uninstall MTProxy successfully!"
         ;;
     3) 
         echo "Starting MTProxy..."
-        systemctl start mtp
-        systemctl enable mtp
+        systemctl start mtg
+        systemctl enable mtg
         echo "MTProxy started successfully!"
         ;;
     4) 
         echo "Stopping MTProxy..."
-        systemctl stop mtp
-        systemctl disable mtp
+        systemctl stop mtg
+        systemctl disable mtg
         echo "MTProxy stopped successfully!"
         ;;
     5)  echo "Restarting MTProxy..."
-        systemctl restart mtp
+        systemctl restart mtg
         echo "MTProxy restarted successfully!"
         ;;
     0) exit 0
         ;;
-    *) echo -e "${Error} Please enter a number [0-5]"
+    *) echo -e "${Error} Please enter a number [0-5]: "
         ;;
     esac
 }
