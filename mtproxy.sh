@@ -29,7 +29,7 @@ download_file(){
 	elif [[ ${bit} = "aarch64" ]]; then
         bit="arm64"
     else
-		bit="386"
+	    bit="386"
 	fi
 
     last_version=$(curl -Ls "https://api.github.com/repos/9seconds/mtg/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
