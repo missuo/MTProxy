@@ -39,15 +39,15 @@ download_file(){
     fi
     echo -e "Latest version of mtg detected: ${last_version}, start installing..."
     version=$(echo ${last_version} | sed 's/v//g')
-    wget -N --no-check-certificate -O /usr/bin/mtg-${version}-linux-${bit}.tar.gz https://github.com/9seconds/mtg/releases/download/${last_version}/mtg-${version}-linux-${bit}.tar.gz
-    if [[ ! -f "/usr/bin/mtg-${version}-linux-${bit}.tar.gz" ]]; then
+    wget -N --no-check-certificate -O mtg-${version}-linux-${bit}.tar.gz https://github.com/9seconds/mtg/releases/download/${last_version}/mtg-${version}-linux-${bit}.tar.gz
+    if [[ ! -f "mtg-${version}-linux-${bit}.tar.gz" ]]; then
         echo -e "${red}Download mtg-${version}-linux-${bit}.tar.gz failed, please try again."
         exit 1
     fi
-    tar -xzf /usr/bin/mtg-${version}-linux-${bit}.tar.gz -C /usr/bin
-    mv /usr/bin/mtg-${version}-linux-${bit}/mtg /usr/bin/mtg
-    rm -f /usr/bin/mtg-${version}-linux-${bit}.tar.gz
-    rm -rf /usr/bin/mtg-${version}-linux-${bit}/mtg
+    tar -xzf mtg-${version}-linux-${bit}.tar.gz
+    mv mtg-${version}-linux-${bit}/mtg /usr/bin/mtg
+    rm -f mtg-${version}-linux-${bit}.tar.gz
+    rm -rf mtg-${version}-linux-${bit}
     chmod +x /usr/bin/mtg
     echo -e "mtg-${version}-linux-${bit}.tar.gz installed successfully, start to configure..."
 }
@@ -92,7 +92,7 @@ configure_systemctl(){
 
 start_menu() {
     clear
-    echo && echo -e "  MTProxy v2 One-Click Installation
+    echo -e "  MTProxy v2 One-Click Installation
 ---- by Vincent | github.com/missuo/MTProxy ----
  ${green} 1.${plain} Install MTProxy
  ${green} 2.${plain} Uninstall MTProxy
@@ -101,7 +101,7 @@ start_menu() {
  ${green} 4.${plain} Stop MTProxy
  ${green} 5.${plain} Restart MTProxy
 ————————————
- ${red} 0.${plain} Exit
+ ${green} 0.${plain} Exit
 ————————————" && echo
 
 	read -e -p " Please enter the number [0-5]: " num
