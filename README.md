@@ -24,7 +24,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/missuo/MTProxy/mtproxy.sh)
 ~~~
 
 ## Public Free MTProxy
-[tg://proxy?server=15.235.134.41&port=8443&secret=eef066e0eba12172c261c8a4baadc021dd6974756e65732e6170706c652e636f6d](tg://proxy?server=15.235.134.41&port=8443&secret=eef066e0eba12172c261c8a4baadc021dd6974756e65732e6170706c652e636f6d)
+[https://t.me/proxy?server=15.235.134.41&port=8443&secret=eef066e0eba12172c261c8a4baadc021dd6974756e65732e6170706c652e636f6d](https://t.me/proxy?server=15.235.134.41&port=8443&secret=eef066e0eba12172c261c8a4baadc021dd6974756e65732e6170706c652e636f6d)
 
 
 ## TO DO
