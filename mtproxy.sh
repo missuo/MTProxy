@@ -57,8 +57,8 @@ configure_mtg(){
     wget -N --no-check-certificate -O /etc/mtg.toml https://raw.githubusercontent.com/missuo/MTProxy/main/mtg.toml
     
     echo ""
-    read -p "Please enter a spoofed domain (default google.com): " domain
-	[ -z "${domain}" ] && domain="google.com"
+    read -p "Please enter a spoofed domain (default itunes.apple.com): " domain
+	[ -z "${domain}" ] && domain="itunes.apple.com"
 
 	echo ""
     read -p "Enter the port to be listened to (default 8443):" port
