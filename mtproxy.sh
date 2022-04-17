@@ -102,7 +102,7 @@ start_menu() {
 ————————————
  ${red} 0.${plain} Exit
 ————————————" && echo
-}
+
 	read -e -p " Please enter the number [0-5]:" num
 	case "$num" in
     1)
@@ -140,4 +140,4 @@ start_menu() {
     *) echo -e "${Error} Please enter a number [0-5]"
         ;;
     esac
-
+}
