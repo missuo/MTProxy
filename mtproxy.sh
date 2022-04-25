@@ -18,7 +18,7 @@ yellow='\033[0;33m'
 plain='\033[0m'
 
 # Make sure run with root
-[[ $EUID -ne 0 ]] && echo -e "[${red}Errot${plain}]Please run this script with ROOT!" && exit 1
+[[ $EUID -ne 0 ]] && echo -e "[${red}Error${plain}]Please run this script with ROOT!" && exit 1
 
 download_file(){
 	echo "Checking System..."
