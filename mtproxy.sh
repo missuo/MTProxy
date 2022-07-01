@@ -3,7 +3,7 @@
  # @Author: Vincent Young
  # @Date: 2022-07-01 15:29:23
  # @LastEditors: Vincent Young
- # @LastEditTime: 2022-07-01 15:48:10
+ # @LastEditTime: 2022-07-01 15:52:05
  # @FilePath: /MTProxy/mtproxy.sh
  # @Telegram: https://t.me/missuo
  # 
@@ -91,7 +91,9 @@ configure_systemctl(){
     # mtg_config=$(mtg access /etc/mtg.toml)
     public_ip=$(curl -s ipv4.ip.sb)
     subscription_config="tg://proxy?server=${public_ip}&port=${port}&secret=${secret}"
+    subscription_link="https://t.me/proxy?server=${public_ip}&port=${port}&secret=${secret}"
     echo -e "${subscription_config}"
+    echo -e "${subscription_link}"
 }
 
 start_menu() {
