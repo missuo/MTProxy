@@ -1,15 +1,17 @@
 #!/bin/bash
+###
+ # @Author: Vincent Young
+ # @Date: 2022-07-01 15:29:23
+ # @LastEditors: Vincent Young
+ # @LastEditTime: 2022-07-01 15:46:07
+ # @FilePath: /MTProxy/mtproxy.sh
+ # @Telegram: https://t.me/missuo
+ # 
+ # Copyright © 2022 by Vincent, All Rights Reserved. 
+### 
+
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
-#================================================================
-#	System Required: CentOS 6/7/8,Debian 8/9/10,Ubuntu 16/18/20
-#	Description: MTProxy v2 One-Click Installation
-#	Version: 0.1
-#	Author: Vincent Young
-# 	Telegram: https://t.me/missuo
-#	Github: https://github.com/missuo/MTProxy
-#	Latest Update: April 17, 2022
-#=================================================================
 
 # Define Color
 red='\033[0;31m'
@@ -26,11 +28,11 @@ download_file(){
 	bit=`uname -m`
 	if [[ ${bit} = "x86_64" ]]; then
 		bit="amd64"
-	elif [[ ${bit} = "aarch64" ]]; then
+    elif [[ ${bit} = "aarch64" ]]; then
         bit="arm64"
     else
 	    bit="386"
-	fi
+    fi
 
     last_version=$(curl -Ls "https://api.github.com/repos/9seconds/mtg/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
     if [[ ! -n "$last_version" ]]; then
@@ -85,9 +87,11 @@ configure_systemctl(){
     ufw disable
     echo "mtg start successfully, enjoy it!"
     echo ""
-    echo "mtg configuration:"
-    mtg_config=$(mtg access /etc/mtg.toml)
-    echo -e "${mtg_config}"
+    # echo "mtg configuration:"
+    # mtg_config=$(mtg access /etc/mtg.toml)
+    public_ip = $(curl -s ipv4.ip.sb)
+    subscription_config = "tg://proxy?server=${public_ip}&port=${port}&secret=${secret}"
+    echo -e "${subscription_config}"
 }
 
 start_menu() {
