@@ -4,10 +4,15 @@ Highly-opinionated (ex-bullshit-free) MTPROTO proxy for [Telegram](https://teleg
 ## Intro
 **If you have used MTProxy before, you must be using Version 1. At present, the scripts on the Internet are basically Version 1. And my script uses the new Version 2.**
 
-### v1 & v2
+### Differences between v1 and v2
 - Configuration file incompatibility
 - v2 completely removes TAG
-- FakeTLS encryption is used
+- FakeTLS encryption is used in v2
+
+### Updates
+#### July 1st, 2022
+- Add subscription config
+- Add subscription link
 
 ## Supportability
 - X86_64
