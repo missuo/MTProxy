@@ -23,6 +23,9 @@ Highly-opinionated (ex-bullshit-free) MTPROTO proxy for [Telegram](https://teleg
 ~~~shell
 bash <(curl -Ls https://bit.ly/3zNBLO7)
 ~~~
+~~~shell
+bash <(curl -Ls https://raw.githubusercontent.com/missuo/MTProxy/main/mtproxy.sh)
+~~~
 **Due to the CDN cache, jsdelivr link may not be the latest.**
 ~~~shell
 bash <(curl -Ls https://cdn.jsdelivr.net/gh/missuo/MTProxy/mtproxy.sh)
