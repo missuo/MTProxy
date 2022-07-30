@@ -1,3 +1,13 @@
+<!--
+ * @Author: Vincent Young
+ * @Date: 2022-07-01 15:29:23
+ * @LastEditors: Vincent Young
+ * @LastEditTime: 2022-07-30 19:28:49
+ * @FilePath: /MTProxy/README.md
+ * @Telegram: https://t.me/missuo
+ * 
+ * Copyright © 2022 by Vincent, All Rights Reserved. 
+-->
 # MTProxy
 Highly-opinionated (ex-bullshit-free) MTPROTO proxy for [Telegram](https://telegram.org).
 
@@ -10,6 +20,11 @@ Highly-opinionated (ex-bullshit-free) MTPROTO proxy for [Telegram](https://teleg
 - FakeTLS encryption is used in v2
 
 ### Updates
+#### July 30th, 2022
+- Support for modifying the listening port
+- Support for modifying secret
+- Support for updating to latest version of MTProxy
+
 #### July 1st, 2022
 - Add subscription config
 - Add subscription link
@@ -31,9 +46,9 @@ bash <(curl -Ls https://raw.githubusercontent.com/missuo/MTProxy/main/mtproxy.sh
 bash <(curl -Ls https://cdn.jsdelivr.net/gh/missuo/MTProxy/mtproxy.sh)
 ~~~
 
-## TO DO
-- Support for updating MTProxy
-- Support to modify the configuration
+## TO DO 
+- ~~Support for updating MTProxy~~
+- ~~Support to modify the configuration~~
 
 ## Bug Feedback
 [Issue](https://github.com/missuo/MTProxy/issues/new)

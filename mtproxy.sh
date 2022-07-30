@@ -3,7 +3,7 @@
  # @Author: Vincent Young
  # @Date: 2022-07-01 15:29:23
  # @LastEditors: Vincent Young
- # @LastEditTime: 2022-07-01 15:52:05
+ # @LastEditTime: 2022-07-30 19:26:45
  # @FilePath: /MTProxy/mtproxy.sh
  # @Telegram: https://t.me/missuo
  # 
@@ -96,6 +96,34 @@ configure_systemctl(){
     echo -e "${subscription_link}"
 }
 
+change_port(){
+    read -p "Enter the port you want to modify(default 8443):" port
+	[ -z "${port}" ] && port="8443"
+    sed -i "s/bind-to.*/bind-to = \"0.0.0.0:${port}\"/g" /etc/mtg.toml
+    echo "Restarting MTProxy..."
+    systemctl restart mtg
+    echo "MTProxy restarted successfully!"
+}
+
+change_secret(){
+    echo -e "Please note that unauthorized modification of Secret may cause MTProxy to not function properly."
+    read -p "Enter the secret you want to modify:" secret
+	[ -z "${secret}" ] && secret="$(mtg generate-secret --hex itunes.apple.com)"
+    sed -i "s/secret.*/secret = \"${secret}\"/g" /etc/mtg.toml
+    echo "Secret changed successfully!"
+    echo "Restarting MTProxy..."
+    systemctl restart mtg
+    echo "MTProxy restarted successfully!"
+}
+
+update_mtg(){
+    echo -e "Updating mtg..."
+    download_file
+    echo "mtg updated successfully, start to restart MTProxy..."
+    systemctl restart mtg
+    echo "MTProxy restarted successfully!"
+}
+
 start_menu() {
     clear
     echo -e "  MTProxy v2 One-Click Installation
@@ -106,6 +134,9 @@ start_menu() {
  ${green} 3.${plain} Start MTProxy
  ${green} 4.${plain} Stop MTProxy
  ${green} 5.${plain} Restart MTProxy
+ ${green} 6.${plain} Change Listen Port
+ ${green} 7.${plain} Change Secret
+ ${green} 8.${plain} Update MTProxy
 ————————————
  ${green} 0.${plain} Exit
 ————————————" && echo
@@ -138,9 +169,19 @@ start_menu() {
         systemctl disable mtg
         echo "MTProxy stopped successfully!"
         ;;
-    5)  echo "Restarting MTProxy..."
+    5)  
+        echo "Restarting MTProxy..."
         systemctl restart mtg
         echo "MTProxy restarted successfully!"
+        ;;
+    6) 
+        change_port
+        ;;
+    7)
+        change_secret
+        ;;
+    8)
+        update_mtg
         ;;
     0) exit 0
         ;;
