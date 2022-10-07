@@ -36,14 +36,14 @@ Highly-opinionated (ex-bullshit-free) MTPROTO proxy for [Telegram](https://teleg
 ## Installation
 **This script uses the latest release of [9seconds/mtg](https://github.com/9seconds/mtg) by default**
 ~~~shell
-bash <(curl -Ls https://cpp.li/mtp)
+bash <(curl -Ls https://cpp.li/mtg)
 ~~~
 **Due to the CDN cache, jsdelivr link may not be the latest.**
 ~~~shell
 bash <(curl -Ls https://cdn.jsdelivr.net/gh/missuo/MTProxy/mtproxy.sh)
 ~~~
 
-## TO DO 
+## TO DO (Implemented)
 - ~~Support for updating MTProxy~~
 - ~~Support to modify the configuration~~
 
