@@ -141,7 +141,7 @@ start_menu() {
  ${green} 0.${plain} Exit
 ————————————" && echo
 
-	read -e -p " Please enter the number [0-5]: " num
+	read -e -p " Please enter the number [0-8]: " num
 	case "$num" in
     1)
 		download_file
