@@ -185,7 +185,7 @@ start_menu() {
         ;;
     0) exit 0
         ;;
-    *) echo -e "${Error} Please enter a number [0-5]: "
+    *) echo -e "${Error} Please enter a number [0-8]: "
         ;;
     esac
 }
