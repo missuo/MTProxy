@@ -52,7 +52,8 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/missuo/MTProxy/mtproxy.sh)
 ## Open Source Used
 [9seconds/mtg](https://github.com/9seconds/mtg)
 
-## LICENSE
-[MIT](https://github.com/missuo/MTProxy/blob/main/LICENSE)
+## Author
+
+**MTProxy** © [Vincent Young](https://github.com/missuo), Released under the [MIT](./LICENSE) License.<br>
 
 
