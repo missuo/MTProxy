@@ -43,12 +43,6 @@ bash <(curl -Ls https://cpp.li/mtg)
 bash <(curl -Ls https://cdn.jsdelivr.net/gh/missuo/MTProxy/mtproxy.sh)
 ~~~
 
-## TO DO
-- None
-
-## Bug Feedback
-[Issue](https://github.com/missuo/MTProxy/issues/new)
-
 ## Open Source Used
 [9seconds/mtg](https://github.com/9seconds/mtg)
 
